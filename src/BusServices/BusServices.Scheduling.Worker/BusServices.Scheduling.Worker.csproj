@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="NServiceBus" Version="7.5.0" />
+	  <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.1.0" />
+	  <PackageReference Include="NServiceBus.Heartbeat" Version="3.0.1" />
+	  <PackageReference Include="NServiceBus.Metrics.ServiceControl" Version="3.0.6" />
+	  <PackageReference Include="MediatR" Version="9.0.0" />
+	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BusServices.Messages\BusServices.Messages.csproj" />
+    <ProjectReference Include="..\BusServices.NServiceBus\BusServices.NServiceBus.csproj" />
+    <ProjectReference Include="..\BusServices.Scheduling.Application\BusServices.Scheduling.Application.csproj" />
+    <ProjectReference Include="..\BusServices.Scheduling.Persistence.InMemory\BusServices.Scheduling.Persistence.InMemory.csproj" />
+  </ItemGroup>
+
+</Project>

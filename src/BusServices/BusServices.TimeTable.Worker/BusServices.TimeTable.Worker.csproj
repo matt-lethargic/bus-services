@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-BusServices.TimeTable.WorkerService-8513F06B-C7DD-4C44-B4AC-E93B32C89A4D</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="NServiceBus" Version="7.5.0" />
+	  <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.1.0" />
+	  <PackageReference Include="NServiceBus.Heartbeat" Version="3.0.1" />
+	  <PackageReference Include="NServiceBus.Metrics.ServiceControl" Version="3.0.6" />
+  </ItemGroup>
+</Project>
