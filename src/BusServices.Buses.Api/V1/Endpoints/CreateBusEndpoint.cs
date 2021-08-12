@@ -36,7 +36,7 @@ namespace BusServices.Buses.Api.V1.Endpoints
             var command = new CreateBus(request.Id.Value, request.Registration, request.YearBuilt);
 
             await _mediator.Send(command, cancellationToken);
-
+            
             return Created(request.Id.Value.ToString(), request);
         }
     }

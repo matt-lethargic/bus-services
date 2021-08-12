@@ -17,8 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Buses.Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".info", ".info", "{B90145A8-ADDB-4AAF-AC94-5ABAD2D3941A}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\.gitignore = ..\..\.gitignore
-		..\..\README.md = ..\..\README.md
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TimeTable", "TimeTable", "{893C37E9-8BBB-489F-98E4-D35864D85813}"

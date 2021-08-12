@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
 using BusServices.NServiceBus;
+using MongoDB.Driver;
 using NServiceBus;
 
 namespace BusServices.Buses.Api
@@ -18,17 +18,17 @@ namespace BusServices.Buses.Api
             Host.CreateDefaultBuilder(args)
                 .UseNServiceBus(context =>
                 {
-                    var endpointConfiguration =
-                        new EndpointConfiguration(context.Configuration.GetValue<string>("EndpointName"));
-                    var transport = endpointConfiguration.UseTransport<LearningTransport>();
+                    var endpointConfiguration = new EndpointConfiguration(context.Configuration.GetValue<string>("EndpointName"));
+                    endpointConfiguration.EnableInstallers();
+                    var persistence = endpointConfiguration.UsePersistence<MongoPersistence>();
+                    persistence.MongoClient(new MongoClient(context.Configuration.GetValue<string>("MongoConnectionString")));
+                    persistence.DatabaseName(context.Configuration.GetValue<string>("MongoDatabase"));
+                    persistence.UseTransactions(false);
 
-                    endpointConfiguration.SendFailedMessagesTo("error");
-                    endpointConfiguration.AuditProcessedMessagesTo("audit");
-                    endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
-
-                    var metrics = endpointConfiguration.EnableMetrics();
-                    metrics.SendMetricDataToServiceControl("Particular.Monitoring", TimeSpan.FromMilliseconds(500));
-
+                    var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+                    transport.UseConventionalRoutingTopology();
+                    transport.ConnectionString(context.Configuration.GetValue<string>("EndpointConnectionString"));
+                    
                     endpointConfiguration.Conventions().Add(new BusServiceMessageConventions());
                     
                     return endpointConfiguration;

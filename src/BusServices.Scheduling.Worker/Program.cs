@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 using NServiceBus;
 
 namespace BusServices.Scheduling.Worker
@@ -36,16 +37,16 @@ namespace BusServices.Scheduling.Worker
                 .UseNServiceBus(context =>
                 {
                     var endpointConfiguration = new EndpointConfiguration(context.Configuration.GetValue<string>("EndpointName"));
-                    endpointConfiguration.UseTransport<LearningTransport>();
-                    
-                    endpointConfiguration.SendFailedMessagesTo("error");
-                    endpointConfiguration.AuditProcessedMessagesTo("audit");
-                    endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
-                    
-                    var metrics = endpointConfiguration.EnableMetrics();
-                    metrics.SendMetricDataToServiceControl("Particular.Monitoring",
-                        TimeSpan.FromMilliseconds(500));
+                    endpointConfiguration.EnableInstallers();
+                    var persistence = endpointConfiguration.UsePersistence<MongoPersistence>();
+                    persistence.MongoClient(new MongoClient(context.Configuration.GetValue<string>("MongoConnectionString")));
+                    persistence.DatabaseName(context.Configuration.GetValue<string>("MongoDatabase"));
+                    persistence.UseTransactions(false);
 
+                    var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+                    transport.UseConventionalRoutingTopology();
+                    transport.ConnectionString(context.Configuration.GetValue<string>("EndpointConnectionString"));
+                    
                     endpointConfiguration.Conventions().Add(new BusServiceMessageConventions());
 
                     return endpointConfiguration;

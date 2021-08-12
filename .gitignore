@@ -351,6 +351,8 @@ MigrationBackup/
 
 # NServiceBus Learning Transport
 .learningtransport
-
+.audit-db
+.db
+.logs
 
 license.xml

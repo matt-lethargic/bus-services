@@ -19,6 +19,7 @@
     <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.1.0" />
     <PackageReference Include="NServiceBus.Heartbeat" Version="3.0.1" />
     <PackageReference Include="NServiceBus.Metrics" Version="3.0.0" />
+    <PackageReference Include="NServiceBus.RabbitMQ" Version="6.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 

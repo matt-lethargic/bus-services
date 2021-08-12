@@ -1,5 +1,8 @@
 using BusServices.Api;
+using BusServices.Buses.Api.Infrastructure;
 using BusServices.Buses.Api.V1.Mapping;
+using BusServices.Buses.Application;
+using BusServices.Buses.Application.Commands.V1;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +13,7 @@ using BusServices.Buses.Application.Queries.V1;
 using BusServices.Buses.Domain.Ports;
 using BusServices.Buses.EventPublisher.NServiceBus;
 using BusServices.Buses.Persistence.InMemory;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -55,6 +59,10 @@ namespace BusServices.Buses.Api
 
             services.AddTransient<IBusRepository, InMemoryBusRepository>();
             services.AddTransient<IEventPublisher, NServiceBusEventPublisher>();
+
+            AssemblyScanner.FindValidatorsInAssembly(typeof(CreateBusValidator).Assembly)
+                .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -73,6 +81,7 @@ namespace BusServices.Buses.Api
                 }
             });
 
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

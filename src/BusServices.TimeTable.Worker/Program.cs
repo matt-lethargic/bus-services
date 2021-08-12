@@ -17,25 +17,14 @@ namespace BusServices.TimeTable.Worker
             return Host.CreateDefaultBuilder(args)
                 .UseNServiceBus(context =>
                 {
-                    // Define the endpoint name
                     var endpointConfiguration = new EndpointConfiguration(context.Configuration.GetValue<string>("EndpointName"));
+                    var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
+                    transport.UseConventionalRoutingTopology();
+                    transport.ConnectionString(context.Configuration.GetValue<string>("EndpointConnectionString"));
+                    
+                    // endpointConfiguration.SendFailedMessagesTo("error");
+                    // endpointConfiguration.AuditProcessedMessagesTo("audit");
 
-                    // Select the learning (filesystem-based) transport to communicate
-                    // with other endpoints
-                    endpointConfiguration.UseTransport<LearningTransport>();
-
-                    // Enable monitoring errors, auditing, and heartbeats with the
-                    // Particular Service Platform tools
-                    endpointConfiguration.SendFailedMessagesTo("error");
-                    endpointConfiguration.AuditProcessedMessagesTo("audit");
-                    endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl");
-
-                    // Enable monitoring endpoint performance
-                    var metrics = endpointConfiguration.EnableMetrics();
-                    metrics.SendMetricDataToServiceControl("Particular.Monitoring",
-                        TimeSpan.FromMilliseconds(500));
-
-                    // Return the completed configuration
                     return endpointConfiguration;
                 });
         }
