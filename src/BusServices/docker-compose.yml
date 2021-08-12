@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  busservices.buses.api:
+    image: ${DOCKER_REGISTRY-}busservicesbusesapi
+    build:
+      context: .
+      dockerfile: BusServices.Buses.Api/Dockerfile
+    depends_on:
+            - rabbitmq
+
+  busservices.scheduling.worker:
+    image: ${DOCKER_REGISTRY-}busservicesschedulingworker
+    build:
+      context: .
+      dockerfile: BusServices.Scheduling.Worker/Dockerfile
+    depends_on:
+            - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3.8-management"
+    ports:
+        - "15672:15672"
+        - "5672:5672"
+    healthcheck:
+        test: ["CMD-SHELL", "if rabbitmqctl status; then \nexit 0 \nfi \nexit 1"]
+        interval: 10s
+        retries: 5

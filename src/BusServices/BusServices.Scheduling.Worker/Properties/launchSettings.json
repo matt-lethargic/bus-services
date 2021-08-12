@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BusServices.Scheduling.Worker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

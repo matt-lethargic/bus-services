@@ -25,23 +25,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TimeTable", "TimeTable", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.TimeTable.Worker", "BusServices.TimeTable.Worker\BusServices.TimeTable.Worker.csproj", "{4D3E10AE-5A73-49EB-9DE7-936AC6127AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.Api", "BusServices.Swagger\BusServices.Api.csproj", "{90FFC0F3-6B4D-4F32-B023-3D5D032CAA81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Api", "BusServices.Swagger\BusServices.Api.csproj", "{90FFC0F3-6B4D-4F32-B023-3D5D032CAA81}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Buses.Persistence.InMemory", "BusServices.Buses.Persistence.InMemory\BusServices.Buses.Persistence.InMemory.csproj", "{72F6A6C5-52B5-4EEE-8166-A2EFA4D286A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.NServiceBus", "BusServices.NServiceBus\BusServices.NServiceBus.csproj", "{3330D0EB-A4B2-46C5-AD9E-6648B1FA0416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.NServiceBus", "BusServices.NServiceBus\BusServices.NServiceBus.csproj", "{3330D0EB-A4B2-46C5-AD9E-6648B1FA0416}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Buses.EventPublisher.NServiceBus", "BusServices.Buses.EventPublisher.NServiceBus\BusServices.Buses.EventPublisher.NServiceBus.csproj", "{F8854768-D52B-440B-A93F-2DF94F0E9930}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scheduling", "Scheduling", "{155DFB5E-45A5-433E-9988-CD58794E13D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.Scheduling.Worker", "BusServices.Scheduling.Worker\BusServices.Scheduling.Worker.csproj", "{597F0108-57AE-4408-9966-82E672D3E4A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Scheduling.Worker", "BusServices.Scheduling.Worker\BusServices.Scheduling.Worker.csproj", "{597F0108-57AE-4408-9966-82E672D3E4A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.Scheduling.Domain", "BusServices.Scheduling.Domain\BusServices.Scheduling.Domain.csproj", "{FDD5CD26-5DB7-41AD-A4CF-8CCE361F3BDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Scheduling.Domain", "BusServices.Scheduling.Domain\BusServices.Scheduling.Domain.csproj", "{FDD5CD26-5DB7-41AD-A4CF-8CCE361F3BDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.Scheduling.Application", "BusServices.Scheduling.Application\BusServices.Scheduling.Application.csproj", "{A5136891-F73D-4167-AED5-CE5D39F74D5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Scheduling.Application", "BusServices.Scheduling.Application\BusServices.Scheduling.Application.csproj", "{A5136891-F73D-4167-AED5-CE5D39F74D5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusServices.Scheduling.Persistence.InMemory", "BusServices.Scheduling.Persistence.InMemory\BusServices.Scheduling.Persistence.InMemory.csproj", "{2858F44B-3D09-4D25-B140-56DD338DC645}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusServices.Scheduling.Persistence.InMemory", "BusServices.Scheduling.Persistence.InMemory\BusServices.Scheduling.Persistence.InMemory.csproj", "{2858F44B-3D09-4D25-B140-56DD338DC645}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E13636B2-8BDE-4D0A-B508-EA75814EC328}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{2858F44B-3D09-4D25-B140-56DD338DC645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2858F44B-3D09-4D25-B140-56DD338DC645}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2858F44B-3D09-4D25-B140-56DD338DC645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E13636B2-8BDE-4D0A-B508-EA75814EC328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E13636B2-8BDE-4D0A-B508-EA75814EC328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E13636B2-8BDE-4D0A-B508-EA75814EC328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E13636B2-8BDE-4D0A-B508-EA75814EC328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
